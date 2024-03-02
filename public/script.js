@@ -22,6 +22,11 @@ function getMousePosition(e) {
   flashlight.style.setProperty("--Ypos", mouseY + "px");
 }
 
+function getClickPosition(e) {
+  flashlight.style.setProperty("--Xpos", e.pageX + "px");
+  flashlight.style.setProperty("--Ypos", e.pageY + "px");
+}
+
 
 function toggleDarkmode() {
   darkmodeEnabled = !darkmodeEnabled;
@@ -40,5 +45,8 @@ function toggleDarkmode() {
 
 document.addEventListener("mousemove", getMousePosition);
 document.addEventListener("touchmove", getMousePosition);
+
+// an easier way for moving the flashlight on touch devices.
+document.addEventListener("click", getClickPosition)
 
 darkmodeSelector.addEventListener("click", toggleDarkmode)
