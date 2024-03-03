@@ -5,6 +5,7 @@ let darkmodeEnabled = false;
 const flashlight = document.getElementById("flashlight");
 const darkmodeSelector = document.getElementById("darkmode-selector");
 const dwarves = document.getElementsByClassName("dwarves").item(0)
+const lostDwarf = document.getElementsByClassName("lost-dwarf").item(0)
 
 const isTouchDevice = () => {
   try {
@@ -35,13 +36,22 @@ function toggleDarkmode() {
     flashlight.hidden = false;
     darkmodeSelector.innerHTML = "dark mode? off | [on]";
     dwarves.hidden = false;
+    lostDwarf.hidden = false;
   } else {
     flashlight.hidden = true;
     darkmodeSelector.innerHTML = "dark mode? [off] | on";
     dwarves.hidden = true;
+    lostDwarf.hidden = true;
   }
 }
 
+function dwarfPositionChanger() {
+  let lostDwarfposition = 0
+  return () => {
+    lostDwarfposition = (lostDwarfposition + 1) % 3
+    lostDwarf.className = `lost-dwarf-pos${lostDwarfposition}`
+  }
+}
 
 document.addEventListener("mousemove", getMousePosition);
 document.addEventListener("touchmove", getMousePosition);
@@ -50,3 +60,7 @@ document.addEventListener("touchmove", getMousePosition);
 document.addEventListener("click", getClickPosition)
 
 darkmodeSelector.addEventListener("click", toggleDarkmode)
+
+const changeDwarfPosition = dwarfPositionChanger()
+lostDwarf.addEventListener("mouseover", changeDwarfPosition)
+lostDwarf.addEventListener("touchstart", changeDwarfPosition)
