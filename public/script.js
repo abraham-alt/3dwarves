@@ -4,8 +4,8 @@ let darkmodeEnabled = false;
 
 const flashlight = document.getElementById("flashlight");
 const darkmodeSelector = document.getElementById("darkmode-selector");
-const dwarves = document.getElementsByClassName("dwarves").item(0)
-const lostDwarf = document.getElementsByClassName("lost-dwarf").item(0)
+const dwarves = document.getElementsByClassName("dwarves").item(0);
+const lostDwarf = document.getElementsByClassName("lost-dwarf").item(0);
 
 const isTouchDevice = () => {
   try {
@@ -28,7 +28,6 @@ function getClickPosition(e) {
   flashlight.style.setProperty("--Ypos", e.pageY + "px");
 }
 
-
 function toggleDarkmode() {
   darkmodeEnabled = !darkmodeEnabled;
 
@@ -46,21 +45,21 @@ function toggleDarkmode() {
 }
 
 function dwarfPositionChanger() {
-  let lostDwarfposition = 0
+  let lostDwarfposition = 0;
   return () => {
-    lostDwarfposition = (lostDwarfposition + 1) % 3
-    lostDwarf.className = `lost-dwarf-pos${lostDwarfposition}`
-  }
+    lostDwarfposition = (lostDwarfposition + 1) % 3;
+    lostDwarf.className = `lost-dwarf-pos${lostDwarfposition}`;
+  };
 }
 
 document.addEventListener("mousemove", getMousePosition);
 document.addEventListener("touchmove", getMousePosition);
 
 // an easier way for moving the flashlight on touch devices.
-document.addEventListener("click", getClickPosition)
+document.addEventListener("click", getClickPosition);
 
-darkmodeSelector.addEventListener("click", toggleDarkmode)
+darkmodeSelector.addEventListener("click", toggleDarkmode);
 
-const changeDwarfPosition = dwarfPositionChanger()
-lostDwarf.addEventListener("mouseover", changeDwarfPosition)
-lostDwarf.addEventListener("touchstart", changeDwarfPosition)
+const changeDwarfPosition = dwarfPositionChanger();
+lostDwarf.addEventListener("mouseover", changeDwarfPosition);
+lostDwarf.addEventListener("touchstart", changeDwarfPosition);
